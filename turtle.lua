@@ -1,6 +1,9 @@
 local web = assert(http.websocket("ws://uni4on.asuscomm.com:2233"))
+turtle_port = ""
 turtle.refuel(64)
 print(turtle.getFuelLevel())
+
+
 --execute line
 function exec(ch)
     if ch == "w" then turtle.forward()
@@ -33,7 +36,7 @@ function main()
     while true do
         x = web.receive()
         c = textutils.unserialiseJSON(x)
-        if c.ent == 22 then
+        if c.ent == turtle_port then
             exec(c.control_char)
         end
     end
