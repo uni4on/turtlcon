@@ -11,6 +11,8 @@ end
 --main function
 
 local function runZ()
+    term.setCursorPos(1,1)
+    term.clear()
     io.write("Runner Custom commands v2.1 \n execute->") 
     char = io.read()
     if char == "chport" then SelectPort()
@@ -19,16 +21,25 @@ local function runZ()
 end
 
 
---execution
+--execution -----------------------------------------------------------
 
 print("turtle control module enabled!!!")
 SelectPort()
-print("press any char to send on server...")
 
-while true do
-    event, char = os.pullEvent("char")
-        if char == "p" then runZ() end
-    upack = {["control_char"]=char, ["ent"]=port}
-    pack = textutils.serialiseJSON(upack)
-    web.send(pack)
+--main
+function main()
+    while true do
+        term.clear()
+        term.setCursorPos(1,1)
+        print("press any char to send on server...")
+        print("curret send port -"..port)
+
+        event, char = os.pullEvent("char")
+            if char == "p" then runZ() end
+        upack = {["control_char"]=char, ["ent"]=port}
+        pack = textutils.serialiseJSON(upack)
+        web.send(pack)
+    end
 end
+
+main()
