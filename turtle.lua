@@ -6,6 +6,7 @@ print(turtle.getFuelLevel())
 
 --execute line
 function exec(ch)
+    print(ch)
     if ch == "w" then turtle.forward()
     elseif ch == "a" then turtle.turnLeft()
     elseif ch == "s" then turtle.back()
@@ -19,6 +20,7 @@ function exec(ch)
     elseif ch == "h" then turtle.place()
     elseif ch == "b" then turtle.placeDown()
     elseif ch == "q" then drop()
+    elseif string.sub(ch, 1, 2) == "/s" then select(ch)
     end
 end
 
@@ -31,6 +33,12 @@ function drop()
     turtle.select(1)
 end
 
+function select(d)
+    raw1 = string.sub(d, -2, -1)
+    SelectNum = tonumber(raw1)
+    turtle.select(SelectNum)
+
+end
 -- main
 function main()
     while true do
