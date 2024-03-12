@@ -1,7 +1,7 @@
 
 
 function init()
-    local web = assert(http.websocket("ws://uni4on.asuscomm.com:2233"))
+    web = assert(http.websocket("ws://uni4on.asuscomm.com:2233"))
     turtle_port = ""
     turtle.refuel(64)
     print(turtle.getFuelLevel())
