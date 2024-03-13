@@ -8,6 +8,29 @@ local function SelectPort()
     port = io.read()
 end
 
+local function ping()
+    local function recv()
+        while true do
+            local x = web.receive()
+            print(x)
+        end
+    end
+
+    local function send()
+        for i =1, 10 do
+            local x = textutils.serialiseJSON({["type"]="ping"})
+            web.send(x)
+            os.sleep(1)
+            print(i)
+        end
+    end
+
+    parallel.waitForAny(recv, send)
+    
+    io.read()
+end
+
+
 --main function
 
 local function runZ()
@@ -16,6 +39,7 @@ local function runZ()
     io.write("Runner Custom commands v2.1 \n execute->") 
     char = io.read()
     if char == "chport" then SelectPort()
+    elseif char == "ping" then print("XXXXXXXXXXXXXX") ping()
     end
     term.clear()
 end

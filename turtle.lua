@@ -1,5 +1,5 @@
 local web = assert(http.websocket("ws://uni4on.asuscomm.com:2233"))
-turtle_port = ""
+turtle_port = "lab"
 turtle.refuel(64)
 print(turtle.getFuelLevel())
 
@@ -25,6 +25,11 @@ function exec(ch)
 end
 
 --custom functions
+function pingdeamon()
+	deamon = multishell.launch({}, "/deamon.lua", turtle_port)
+	multishell.setTitle(deamon, "DeamonServ")
+end
+
 function drop()
     for i=1,16 do
     turtle.select(i)
@@ -51,6 +56,7 @@ function main()
 end
 
 --run
+pingdeamon()
 main()
 
 
